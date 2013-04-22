@@ -1,0 +1,50 @@
+--- a/conf.d/Makefile.in	2013-03-29 08:11:52.000000000 +0100
++++ b/conf.d/Makefile.in	2013-04-15 17:41:07.315585451 +0200
+@@ -300,21 +300,9 @@ DOC_FILES = \
+ 	README
+ 
+ CONF_LINKS = \
+-	10-scale-bitmap-fonts.conf \
+-	20-unhint-small-vera.conf \
+-	30-urw-aliases.conf \
+-	30-metric-aliases.conf \
+-	40-nonlatin.conf \
+-	45-latin.conf \
+ 	49-sansserif.conf \
+ 	50-user.conf \
+-	51-local.conf \
+-	60-latin.conf \
+-	65-fonts-persian.conf \
+-	65-nonlatin.conf \
+-	69-unifont.conf \
+-	80-delicious.conf \
+-	90-synthetic.conf
++	51-local.conf
+ 
+ EXTRA_DIST = $(template_DATA) $(DOC_FILES)
+ config_DATA = $(DOC_FILES)
+--- a/conf.d/Makefile.am	2013-01-08 07:26:17.000000000 +0100
++++ b/conf.d/Makefile.am	2013-04-15 17:46:57.433778627 +0200
+@@ -25,21 +25,9 @@ DOC_FILES= \
+ 	README
+ 
+ CONF_LINKS = \
+-	10-scale-bitmap-fonts.conf \
+-	20-unhint-small-vera.conf \
+-	30-urw-aliases.conf \
+-	30-metric-aliases.conf \
+-	40-nonlatin.conf \
+-	45-latin.conf \
+ 	49-sansserif.conf \
+ 	50-user.conf \
+-	51-local.conf \
+-	60-latin.conf \
+-	65-fonts-persian.conf \
+-	65-nonlatin.conf \
+-	69-unifont.conf \
+-	80-delicious.conf \
+-	90-synthetic.conf
++	51-local.conf
+ 
+ EXTRA_DIST = $(template_DATA) $(DOC_FILES)
+ 
