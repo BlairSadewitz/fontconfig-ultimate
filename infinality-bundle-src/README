@@ -132,7 +132,7 @@ The libraries that come with `infinality-bundle` can be safely used as
 drop-in replacements for correspondng generic Arch Linux packages, providing 
 fully compatible dependencies for other applications.
 
-[CAUTION]
+[NOTE]
 The beta/development/git versions of the core libraries are not and
 will not be supported by the `bundle`.
 
@@ -156,32 +156,35 @@ The following naming convention is used throughout the `bundle`:
 Fonts: prerequisites
 --------------------
 
-The default--and recommended--configuration defaults to MS font families, 
-including extended, non-latin language support. For best results, use fonts
-available in Windows 7 or 8 Professional. Mac OS fonts are supported, too,
-although the Apple-specific settings are not enabled by default. In this case,
-it is necessary to manually create required symlinks and remove currently 
-active default ones from `/etc/fonts/conf.d`, e.g.
+You have a choice of either Windows, Apple, or free font families for your
+default sans, serif and monospace typefaces. The default--and
+recommended--configuration defaults to MS font families, including extended,
+non-latin language support. For best results, use fonts available in Windows 7
+or 8 Professional.
 
-    # rm /etc/fonts/conf.d/20-aliases-default-win.conf
-    # ln -s /etc/fonts/conf.avail/infinality/20-aliases-default-mac.conf \
-        /etc/fonts/conf.d/20-aliases-default-mac.conf
+In case you want to use either Apple or free fonts instead, you will have to
+manually remove currently active symlinks and create new ones in
+`/etc/fonts/conf.d`, e.g.:
 
-Free fonts should be automatically used as fallback ones when none of the major
-sets is detected.
+  # cd /etc/fonts/conf.d
+  # rm 20-aliases-default.conf
+  # ln -s ../conf.avail.infinality/20-aliases-default-free.conf
+
+The highly recommended free font family is available in the AUR as
+`ttf-chromeos-fonts` package.
+
+Free fonts should be always automatically used as fallback ones when none of
+the major sets is detected.
 
 The Infinality compatible settings are collected in
 `/etc/fonts/conf.avail.infinality` to separate them from generic `fontconfig`
 files present in `/etc/fonts/conf.avail`.
 
-If a font face is available both in `TTF` and `OTF` format, the preferred one is
-usually `OTF`, as long as the `OTF` version is _not_ in early development
-stage, premature or experimental. `OTF` is a newer and easier to handle standard,
-and as a successor of the TrueType format it overcomes many of its limitations.
-For more information, see <<anchor-8,Further reading & references>>.
-
-[CAUTION]
-It is assumed that you have access to legal copies of the fonts.
+If a font is available both in `TTF` and `OTF` format, the preferred one is
+usually `OTF`, as long as the `OTF` version is _not_ in early development or
+experimental stage. `OTF` is a newer and easier to handle standard, and as a
+successor of the TrueType format it overcomes many of its limitations. For more
+information, see <<anchor-8,Further reading & references>>.
 
 
 [[anchor-5]]
@@ -364,14 +367,17 @@ ArchWiki]
 Freetype subpixel font rendering - lcd monitors Pt 2]
 (and anything on the topic of fonts contributed by **brebs**)
 
-`infinality-bundle` sources and `PKGBUILD` scripts are available at 
+* popular fonts available in Arch Linux
+** https://wiki.archlinux.org/index.php/Fonts[Fonts - ArchWiki]
+
+`infinality-bundle` sources are available at
 https://github.com/bohoomil/fontconf[GitHub] (branch `infinality-bundle`).
 
 
 [[anchor-9]]
-Credits
--------
+Acknowledgements
+----------------
 
-I truly appreciate all the encouragement I received from Arch Linux users 
+I truly appreciate all the encouragement I received from Arch Linux users
 (and not only). There are too many of you to mention. Thank you, guys.
 
