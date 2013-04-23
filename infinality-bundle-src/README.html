@@ -532,7 +532,7 @@ fully compatible dependencies for other applications.</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
-<div class="title">Caution</div>
+<div class="title">Note</div>
 </td>
 <td class="content">The beta/development/git versions of the core libraries are not and
 will not be supported by the <span class="monospaced">bundle</span>.</td>
@@ -564,36 +564,32 @@ be available in the AUR).</td>
 <div class="sect1">
 <h2 id="anchor-4">Fonts: prerequisites</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>The default&#8212;and recommended&#8212;configuration defaults to MS font families,
-including extended, non-latin language support. For best results, use fonts
-available in Windows 7 or 8 Professional. Mac OS fonts are supported, too,
-although the Apple-specific settings are not enabled by default. In this case,
-it is necessary to manually create required symlinks and remove currently
-active default ones from <span class="monospaced">/etc/fonts/conf.d</span>, e.g.</p></div>
+<div class="paragraph"><p>You have a choice of either Windows, Apple, or free font families for your
+default sans, serif and monospace typefaces. The default&#8212;and
+recommended&#8212;configuration defaults to MS font families, including extended,
+non-latin language support. For best results, use fonts available in Windows 7
+or 8 Professional.</p></div>
+<div class="paragraph"><p>In case you want to use either Apple or free fonts instead, you will have to
+manually remove currently active symlinks and create new ones in
+<span class="monospaced">/etc/fonts/conf.d</span>, e.g.:</p></div>
 <div class="literalblock">
 <div class="content monospaced">
-<pre># rm /etc/fonts/conf.d/20-aliases-default-win.conf
-# ln -s /etc/fonts/conf.avail/infinality/20-aliases-default-mac.conf \
-    /etc/fonts/conf.d/20-aliases-default-mac.conf</pre>
+<pre># cd /etc/fonts/conf.d
+# rm 20-aliases-default.conf
+# ln -s ../conf.avail.infinality/20-aliases-default-free.conf</pre>
 </div></div>
-<div class="paragraph"><p>Free fonts should be automatically used as fallback ones when none of the major
-sets is detected.</p></div>
+<div class="paragraph"><p>The highly recommended free font family is available in the AUR as
+<span class="monospaced">ttf-chromeos-fonts</span> package.</p></div>
+<div class="paragraph"><p>Free fonts should be always automatically used as fallback ones when none of
+the major sets is detected.</p></div>
 <div class="paragraph"><p>The Infinality compatible settings are collected in
 <span class="monospaced">/etc/fonts/conf.avail.infinality</span> to separate them from generic <span class="monospaced">fontconfig</span>
 files present in <span class="monospaced">/etc/fonts/conf.avail</span>.</p></div>
-<div class="paragraph"><p>If a font face is available both in <span class="monospaced">TTF</span> and <span class="monospaced">OTF</span> format, the preferred one is
-usually <span class="monospaced">OTF</span>, as long as the <span class="monospaced">OTF</span> version is <em>not</em> in early development
-stage, premature or experimental. <span class="monospaced">OTF</span> is a newer and easier to handle standard,
-and as a successor of the TrueType format it overcomes many of its limitations.
-For more information, see <a href="#anchor-8">Further reading &amp; references</a>.</p></div>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<div class="title">Caution</div>
-</td>
-<td class="content">It is assumed that you have access to legal copies of the fonts.</td>
-</tr></table>
-</div>
+<div class="paragraph"><p>If a font is available both in <span class="monospaced">TTF</span> and <span class="monospaced">OTF</span> format, the preferred one is
+usually <span class="monospaced">OTF</span>, as long as the <span class="monospaced">OTF</span> version is <em>not</em> in early development or
+experimental stage. <span class="monospaced">OTF</span> is a newer and easier to handle standard, and as a
+successor of the TrueType format it overcomes many of its limitations. For more
+information, see <a href="#anchor-8">Further reading &amp; references</a>.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -853,13 +849,25 @@ Freetype subpixel font rendering - lcd monitors Pt 2</a>
 </li>
 </ul></div>
 </li>
+<li>
+<p>
+popular fonts available in Arch Linux
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://wiki.archlinux.org/index.php/Fonts">Fonts - ArchWiki</a>
+</p>
+</li>
 </ul></div>
-<div class="paragraph"><p><span class="monospaced">infinality-bundle</span> sources and <span class="monospaced">PKGBUILD</span> scripts are available at
+</li>
+</ul></div>
+<div class="paragraph"><p><span class="monospaced">infinality-bundle</span> sources are available at
 <a href="https://github.com/bohoomil/fontconf">GitHub</a> (branch <span class="monospaced">infinality-bundle</span>).</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="anchor-9">Credits</h2>
+<h2 id="anchor-9">Acknowledgements</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>I truly appreciate all the encouragement I received from Arch Linux users
 (and not only). There are too many of you to mention. Thank you, guys.</p></div>
@@ -869,9 +877,10 @@ Freetype subpixel font rendering - lcd monitors Pt 2</a>
 <div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
-© bohoomil &lt;@zoho.com&gt;, some rights reserved ::
+© bohoomil, some rights reserved ::
 v0.1 ::
-last updated 2013-04-21
+last updated 2013-04-24 ::
+asciidoc theme: 'scribe' by R. Tomayko
 <br>
 </div>
 </div>
