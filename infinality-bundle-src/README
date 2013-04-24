@@ -16,7 +16,7 @@ rendering offered by Infinality patches and `fontconfig` rules known as
 `fontconfig-infinality-ultimate`.
 
 Even though the installation of separately distributed packages (i.e.
-`freetype2-infinality`, `fontconfig-infinality-ultimate`, `libXft` and
+`freetype2-infinality`, `fontconfig-infinality-ultimate` and
 `cairo-ubuntu`), as present in the AUR, is relatively simple, nevertheless it
 has been confusing which files should be added/removed to achieve the desired
 effect. That is why, for minimum fuss and maximum convenience, a one-shot
@@ -114,8 +114,6 @@ If for some reason the substitution cannot be performed automatically issue
 +
 This should be safe in majority of cases as the new `fontconfig` package will
 provide all the necessary dependencies for use with applications that require it.
-
-* `libxft-infinality-ultimate`
 
 * `cairo-infinality-ultimate` (built with `cairo-respect-fontconfig.patch`,
 `cairo-1.12.8-expose_snapshot-1.patch`, as well as Ubuntu patches).
