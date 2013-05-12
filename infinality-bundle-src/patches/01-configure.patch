@@ -1,0 +1,84 @@
+--- a/configure	2013-03-29 08:11:54.000000000 +0100
++++ b/configure	2013-05-12 09:42:04.066750534 +0200
+@@ -657,6 +657,8 @@ BASECONFIGDIR
+ baseconfigdir
+ TEMPLATEDIR
+ templatedir
++TEMPLATEDIRINF
++templatedirinf
+ FC_FONTDATE
+ FC_CACHEDIR
+ fc_cachedir
+@@ -835,6 +837,7 @@ with_default_fonts
+ with_add_fonts
+ with_cache_dir
+ with_templatedir
++with_templatedirinf
+ with_baseconfigdir
+ with_configdir
+ with_xmldir
+@@ -1518,8 +1521,13 @@ Optional Packages:
+                           Find additional fonts in DIR1,DIR2,...
+   --with-cache-dir=DIR    Use DIR to store cache files
+                           [default=LOCALSTATEDIR/cache/fontconfig]
+-  --with-templatedir=DIR  Use DIR to store the configuration template files
++  --with-templatedir=DIR  Use DIR to store the generic configuration 
++                          template files
+                           [default=DATADIR/fontconfig/conf.avail]
++  --with-templatedirinf=DIR
++                          Use DIR to store the Infinality compliant 
++                          configuration template files
++                          [default=DATADIR/fontconfig/conf.avail.infinality]
+   --with-baseconfigdir=DIR
+                           Use DIR to store the base configuration files
+                           [default=SYSCONFDIR/fonts]
+@@ -14718,6 +14726,14 @@ else
+ fi
+ 
+ 
++# Check whether --with-templatedirinf was given.
++if test "${with_templatedirinf+set}" = set; then :
++  withval=$with_templatedirinf; templatedirinf="$withval"
++else
++  templatedirinf=yes
++fi
++
++
+ # Check whether --with-baseconfigdir was given.
+ if test "${with_baseconfigdir+set}" = set; then :
+   withval=$with_baseconfigdir; baseconfigdir="$withval"
+@@ -14749,6 +14765,13 @@ no|yes)
+ *)
+ 	;;
+ esac
++case "$templatedirinf" in
++no|yes)
++	templatedirinf='${datadir}'/fontconfig/conf.avail.infinality
++	;;
++*)
++	;;
++esac
+ case "$baseconfigdir" in
+ no|yes)
+ 	baseconfigdir='${sysconfdir}'/fonts
+@@ -14771,18 +14794,15 @@ no|yes)
+ 	;;
+ esac
+ 
++
+ TEMPLATEDIR=${templatedir}
++TEMPLATEDIRINF=${templatedirinf}
+ BASECONFIGDIR=${baseconfigdir}
+ CONFIGDIR=${configdir}
+ XMLDIR=${xmldir}
+ 
+ 
+ 
+-
+-
+-
+-
+-
+ 
+ 
+ 
