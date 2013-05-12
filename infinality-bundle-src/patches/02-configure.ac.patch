@@ -8,11 +8,11 @@
 +			[Use DIR to store the generic configuration template files [default=DATADIR/fontconfig/conf.avail]])],
  	[templatedir="$withval"],
  	[templatedir=yes])
-+AC_ARG_WITH(templatedirinf,
-+	[AC_HELP_STRING([--with-templatedirinf=DIR],
++AC_ARG_WITH(templateinfdir,
++	[AC_HELP_STRING([--with-templateinfdir=DIR],
 +			[Use DIR to store the Infinality compliant configuration template files [default=DATADIR/fontconfig/conf.avail.infinality]])],
-+	[templatedirinf="$withval"],
-+	[templatedirinf=yes])
++	[templateinfdir="$withval"],
++	[templateinfdir=yes])
  AC_ARG_WITH(baseconfigdir,
  	[AC_HELP_STRING([--with-baseconfigdir=DIR],
  			[Use DIR to store the base configuration files [default=SYSCONFDIR/fonts]])],
@@ -20,9 +20,9 @@
  *)
  	;;
  esac
-+case "$templatedirinf" in
++case "$templateinfdir" in
 +no|yes)
-+	templatedirinf='${datadir}'/fontconfig/conf.avail.infinality
++	templateinfdir='${datadir}'/fontconfig/conf.avail.infinality
 +	;;
 +*)
 +	;;
@@ -34,14 +34,14 @@
  esac
  
  TEMPLATEDIR=${templatedir}
-+TEMPLATEDIRINF=${templatedirinf}
++TEMPLATEINFDIR=${templateinfdir}
  BASECONFIGDIR=${baseconfigdir}
  CONFIGDIR=${configdir}
  XMLDIR=${xmldir}
  AC_SUBST(templatedir)
  AC_SUBST(TEMPLATEDIR)
-+AC_SUBST(templatedirinf)
-+AC_SUBST(TEMPLATEDIRINF)
++AC_SUBST(templateinfdir)
++AC_SUBST(TEMPLATEINFDIR)
  AC_SUBST(baseconfigdir)
  AC_SUBST(BASECONFIGDIR)
  AC_SUBST(configdir)

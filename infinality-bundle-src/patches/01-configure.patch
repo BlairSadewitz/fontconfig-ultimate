@@ -4,8 +4,8 @@
  baseconfigdir
  TEMPLATEDIR
  templatedir
-+TEMPLATEDIRINF
-+templatedirinf
++TEMPLATEINFDIR
++templateinfdir
  FC_FONTDATE
  FC_CACHEDIR
  fc_cachedir
@@ -13,7 +13,7 @@
  with_add_fonts
  with_cache_dir
  with_templatedir
-+with_templatedirinf
++with_templateinfdir
  with_baseconfigdir
  with_configdir
  with_xmldir
@@ -25,7 +25,7 @@
 +  --with-templatedir=DIR  Use DIR to store the generic configuration 
 +                          template files
                            [default=DATADIR/fontconfig/conf.avail]
-+  --with-templatedirinf=DIR
++  --with-templateinfdir=DIR
 +                          Use DIR to store the Infinality compliant 
 +                          configuration template files
 +                          [default=DATADIR/fontconfig/conf.avail.infinality]
@@ -36,11 +36,11 @@
  fi
  
  
-+# Check whether --with-templatedirinf was given.
-+if test "${with_templatedirinf+set}" = set; then :
-+  withval=$with_templatedirinf; templatedirinf="$withval"
++# Check whether --with-templateinfdir was given.
++if test "${with_templateinfdir+set}" = set; then :
++  withval=$with_templateinfdir; templateinfdir="$withval"
 +else
-+  templatedirinf=yes
++  templateinfdir=yes
 +fi
 +
 +
@@ -51,9 +51,9 @@
  *)
  	;;
  esac
-+case "$templatedirinf" in
++case "$templateinfdir" in
 +no|yes)
-+	templatedirinf='${datadir}'/fontconfig/conf.avail.infinality
++	templateinfdir='${datadir}'/fontconfig/conf.avail.infinality
 +	;;
 +*)
 +	;;
@@ -67,7 +67,7 @@
  
 +
  TEMPLATEDIR=${templatedir}
-+TEMPLATEDIRINF=${templatedirinf}
++TEMPLATEINFDIR=${templateinfdir}
  BASECONFIGDIR=${baseconfigdir}
  CONFIGDIR=${configdir}
  XMLDIR=${xmldir}
