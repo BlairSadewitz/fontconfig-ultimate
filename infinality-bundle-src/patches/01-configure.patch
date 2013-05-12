@@ -1,5 +1,5 @@
---- configure.org	2013-03-29 08:11:54.000000000 +0100
-+++ configure	2013-05-12 16:50:11.850823431 +0200
+--- a/configure	2013-03-29 08:11:54.000000000 +0100
++++ b/configure	2013-05-12 16:50:11.850823431 +0200
 @@ -657,6 +657,8 @@ BASECONFIGDIR
  baseconfigdir
  TEMPLATEDIR
