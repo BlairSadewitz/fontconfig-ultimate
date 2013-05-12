@@ -62,7 +62,7 @@ EXTRA_DIST = $(templateinf_DATA) $(DOC_FILES)
 configdir=$(CONFIGDIR)
 config_DATA = $(DOC_FILES)
 
-templatedirinf = $(TEMPLATEDIRINF)
+templateinfdir = $(TEMPLATEINFDIR)
 templateinf_DATA =				\
 	10-base-rendering.conf		\
 	20-fix-cantarell.conf		\

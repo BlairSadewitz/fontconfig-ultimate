@@ -134,7 +134,7 @@ am__uninstall_files_from_dir = { \
     || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
-am__installdirs = "$(DESTDIR)$(configdir)" "$(DESTDIR)$(templatedirinf)"
+am__installdirs = "$(DESTDIR)$(configdir)" "$(DESTDIR)$(templateinfdir)"
 DATA = $(config_DATA) $(templateinf_DATA)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
@@ -233,7 +233,7 @@ SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 TEMPLATEDIR = @TEMPLATEDIR@
-TEMPLATEDIRINF = @TEMPLATEDIRINF@
+TEMPLATEINFDIR = @TEMPLATEINFDIR@
 VERSION = @VERSION@
 WARN_CFLAGS = @WARN_CFLAGS@
 XMLDIR = @XMLDIR@
@@ -293,7 +293,7 @@ srcdir = @srcdir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 templatedir = $(TEMPLATEDIR)
-templatedirinf = $(TEMPLATEDIRINF)
+templateinfdir = $(TEMPLATEINFDIR)
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
@@ -442,25 +442,25 @@ uninstall-configDATA:
 	dir='$(DESTDIR)$(configdir)'; $(am__uninstall_files_from_dir)
 install-templateinfDATA: $(templateinf_DATA)
 	@$(NORMAL_INSTALL)
-	@list='$(templateinf_DATA)'; test -n "$(templatedirinf)" || list=; \
+	@list='$(templateinf_DATA)'; test -n "$(templateinfdir)" || list=; \
 	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(templatedirinf)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(templatedirinf)" || exit 1; \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(templateinfdir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(templateinfdir)" || exit 1; \
 	fi; \
 	for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  echo "$$d$$p"; \
 	done | $(am__base_list) | \
 	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(templatedirinf)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(templatedirinf)" || exit $$?; \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(templateinfdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(templateinfdir)" || exit $$?; \
 	done
 
 uninstall-templateinfDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(templateinf_DATA)'; test -n "$(templatedirinf)" || list=; \
+	@list='$(templateinf_DATA)'; test -n "$(templateinfdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(templatedirinf)'; $(am__uninstall_files_from_dir)
+	dir='$(DESTDIR)$(templateinfdir)'; $(am__uninstall_files_from_dir)
 tags: TAGS
 TAGS:
 
@@ -504,7 +504,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(DATA)
 installdirs:
-	for dir in "$(DESTDIR)$(configdir)" "$(DESTDIR)$(templatedirinf)"; do \
+	for dir in "$(DESTDIR)$(configdir)" "$(DESTDIR)$(templateinfdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -626,9 +626,9 @@ install-data-hook:
 	@(echo cd $(DESTDIR)$(configdir);			\
 	  cd $(DESTDIR)$(configdir);				\
 	  for i in $(CONF_LINKS); do				\
-	    echo $(RM) $$i";" ln -s $(templatedirinf)/$$i .;	\
+	    echo $(RM) $$i";" ln -s $(templateinfdir)/$$i .;	\
 	    $(RM) $$i;						\
-	    ln -s $(templatedirinf)/$$i .;				\
+	    ln -s $(templateinfdir)/$$i .;				\
 	  done)
 uninstall-local:
 	@(echo cd $(DESTDIR)$(configdir);			\
