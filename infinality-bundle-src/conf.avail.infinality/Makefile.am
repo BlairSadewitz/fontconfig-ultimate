@@ -54,6 +54,7 @@ CONF_LINKS = \
 	76-forced-synthetic.conf		\
 	80-selective-rendering.conf		\
 	81-final-rendering.conf		\
+	82-final-lang-spec.conf		\
 	90-no-synthetic.conf		\
 	95-reject.conf
 
@@ -96,6 +97,7 @@ templateinf_DATA =				\
 	76-forced-synthetic.conf		\
 	80-selective-rendering.conf		\
 	81-final-rendering.conf		\
+	82-final-lang-spec.conf		\
 	90-no-synthetic.conf		\
 	95-reject.conf
 
