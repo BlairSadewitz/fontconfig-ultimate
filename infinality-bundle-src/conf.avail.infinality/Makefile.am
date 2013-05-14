@@ -26,6 +26,7 @@ DOC_FILES= \
 
 CONF_LINKS = \
 	10-base-rendering.conf		\
+	15-tt-monospace-fonts.conf		\
 	20-fix-cantarell.conf		\
 	21-non-tt-rendering.conf		\
 	21-tt-rendering.conf		\
@@ -45,14 +46,13 @@ CONF_LINKS = \
 	65-non-latin.conf		\
 	66-override.conf		\
 	67-aliases-wine.conf		\
-	70-bitmaps.conf		\
+	70-no-bitmaps.conf		\
 	72-embedded-bitmaps.conf		\
 	73-ttf-as-bitmap.conf		\
 	74-force-autohint.conf		\
 	75-qt-subpixel-positioning.conf		\
 	76-forced-synthetic.conf		\
 	80-selective-rendering.conf		\
-	81-final-lang-spec.conf		\
 	81-final-rendering.conf		\
 	90-no-synthetic.conf		\
 	95-reject.conf
@@ -65,13 +65,12 @@ config_DATA = $(DOC_FILES)
 templateinfdir = $(TEMPLATEINFDIR)
 templateinf_DATA =				\
 	10-base-rendering.conf		\
+	15-tt-monospace-fonts.conf		\
 	20-fix-cantarell.conf		\
 	21-non-tt-rendering.conf		\
 	21-tt-rendering.conf		\
-	22-tt-monospace-rendering.conf		\
 	30-non-tt-fonts.conf		\
 	30-tt-fonts.conf		\
-	30-tt-monospace-fonts.conf		\
 	32-tt-traced-bitmap-rendering.conf		\
 	35-droid-sans-group.conf		\
 	35-droid-serif-group.conf		\
@@ -87,12 +86,8 @@ templateinf_DATA =				\
 	65-non-latin.conf		\
 	66-override.conf		\
 	67-aliases-wine.conf		\
-	68-aliases-default.conf		\
-	68-aliases-default-custom.conf		\
-	68-aliases-default-free.conf		\
-	68-aliases-default-mac.conf		\
-	69-aliases-wine.conf		\
-	70-bitmaps.conf		\
+	70-no-bitmaps.conf		\
+	70-yes-bitmaps.conf		\
 	71-postscript.conf		\
 	72-embedded-bitmaps.conf		\
 	73-ttf-as-bitmap.conf		\
@@ -100,12 +95,9 @@ templateinf_DATA =				\
 	75-qt-subpixel-positioning.conf		\
 	76-forced-synthetic.conf		\
 	80-selective-rendering.conf		\
-	81-final-lang-spec.conf		\
 	81-final-rendering.conf		\
 	90-no-synthetic.conf		\
 	95-reject.conf
-
-
 
 install-data-hook:
 	mkdir -p $(DESTDIR)$(configdir)
