@@ -4,7 +4,7 @@ infinality-bundle user notes
 //footer data
 :author:    bohoomil
 :email:     <@zoho.com>
-:revnumber: 0.1
+:revnumber: 0.2
 
 
 [[anchor-1]]
@@ -12,7 +12,7 @@ What is, what is not & motivation
 ---------------------------------
 
 `infinality-bundle` is a collection of software utilizing the power of font
-rendering offered by Infinality patches and `fontconfig` rules known as
+rendering offered by infinality patches and `fontconfig` rules known as
 `fontconfig-infinality-ultimate`.
 
 Even though the installation of separately distributed packages (i.e.
@@ -35,7 +35,7 @@ missing the feel of the original. Infinality patches offer something different
 and more than any of the available rendering solutions -- even more than they do
 themselves out of the box. That is why the aim of `infinality-bundle` is to
 make use of the vast potential hidden in native Linux font rendering back-end
-that was brought to the entirely new level by the author of Infinality patches.
+that was brought to the entirely new level by the author of infinality patches.
 
 *Linux no more needs to reproduce well known solutions as it is capable of
 proposing new ones on its own, and creating new standards just like it has been
@@ -52,43 +52,66 @@ discovered.
 fontconfig-infinality-ultimate vs. fontconfig-infinality
 --------------------------------------------------------
 
-Although `infinality-bundle` was entirely made possible by excellent
-Infinality patches, it is not compatible with generic Infinality settings in
-every respect. Here is a short list of most significant differences:
+Although `infinality-bundle` was entirely made possible by excellent infinality
+patches, it is not compatible with generic infinality settings in every respect.
+
+As of version `2.10.92-10`, `fontconfig-infinality-ultimate` entirely abandons
+the ``nesting'' configuration model known from `fontconfig-infinality`, and
+configuration templates found in `/etc/fonts/conf.avail.infinality` from now on
+mimic the layout of the generic `/etc/fonts/conf.avail` as close as possible.
+
+There are quite a few benefits of reverting to a typical `fontconfig` style
+configuration:
+
+- The infinality configuration files are hardcoded into `fontconfig` source
+code, allowing for easier maintenance, building, rebuilding and porting
+`fontconfig-infinality-ultimate` to other compatible operating systems. A
+complete set of patches was made available, alongside modified PKGBUILD,
+making the process dramatically more straightforward.
+
+- Deploying `fontconfig-infinality-ultimate` in other Linux distributions should
+require as little as applying the patches and substituting the generic
+`infinality-settings.sh` with a custom one from the `bundle`.
+
+- Using a single `fontconfig` configuration tree should help avoid potential
+issues caused by injecting a complex set of additional config files into the
+primary structure. The latter approach has proved to be less reliable and more
+prone to problems, for instance due to accidental mutual overriding of settings
+by stock `fontconfig` and the `ultimate` plugin.
+
+Here is a short list of further most substantial differences:
 
 - Multiple runtime settings that come with `freetype2-infinality`, including,
 among other things, a selection of Windows, Apple and Ubuntu schemes were
 replaced by a single new one, as needed by `fontconfig-infinality-ultimate`.
 `/etc/profile.d/infinality-settings.sh` should _not_ be used in conjunction
-with any other similar file either supplied with Infinality sources, or with
+with any other similar file either supplied with infinality sources, or with
 other custom packages. Any previously installed runtime file can be safely
 removed once `freetype2-infinality-ultimate` has been installed.
 
-- `/etc/fonts/infinality/infinality.conf` was merged with
-`/etc/fonts/fonts.conf` and `/etc/fonts/conf.d/52-infinality.conf` was removed
-as not needed anymore. Since the purpose of the
-`fontconfig-infinality-ultimate` package was to create a separately maintained
-`fontconfig` library that would integrate both generic and Infinality features,
-it seemed unnecessary to keep multiple files serving the same purpose.
-`fontconfig-infinality-ultimate` was tailored for use with
-`freetype2-infinality-ultimate` in the first place, and although it can be
-switched to act as a generic Arch `fontconfig` library (which requires
-manual user intervention), it is recommended to use it _only_ with
-`infinality-bundle` for more straightforward maintenance. In majority of
-cases, using the pre-compiled packages, or building the `bundle` from provided
-scripts on one's own, is a recommended solution that should _just work_ (and I
-hope it will).
-+
-The generic `fontconfig` files are still available for reference in
-`/etc/fonts/conf.avail` and `/etc/fonts/fonts.conf.pacsave`.
+- `/etc/fonts/infinality/infinality.conf` was reverted to its original form. All
+the settings formerly found in `infinality.conf` are now located in separate
+config files available in `/etc/fonts/conf.avail.infinality`. They can be
+activated as needed via symbolic links in `/etc/fonts/conf.d`.
 
-- Type1 fonts are enabled by default. In certain cases it is recommended to use
-`T1` fonts instead of `TTF` (e.g. Lexi Mono). All Postscript fonts used for
-testing, available in Arch Linux official repositories, have proved to render
-correctly.
+- Per-user customizations should be located in
++
+    $XDG_CONFIG_HOME/fontconfig/conf.d
+    $XDG_CONFIG_HOME/fontconfig/fonts.conf
++
+A few examples can be found in `/usr/share/doc/fontconfig-infinality-ultimate/`.
+Once activated, custom settings should be honored by applications.
+
+- Type1 fonts are enabled by default. In certain cases the use of `T1`
+fonts instead of `TTF` is recommended (e.g. Lexi Mono). All Postscript fonts 
+used for testing, available in Arch Linux official repositories, have proved 
+to render correctly.
 
 - Several new fonts are supported by the `bundle`, and in a few cases the
 default `fontconfig-infinality` settings have been modified.
+
+All in all, you may think of `fontconfig-infinality-ultimate` as a stock
+`fontconfig` package with a hard coded infinality functionality.
 
 
 [[anchor-3]]
@@ -98,15 +121,15 @@ infinality-bundle components
 `infinality-bundle` consists of the following packages:
 
 * `freetype2-infinality-ultimate` (incl. most recent, officially released
-Infinality patches and custom runtime settings)
+infinality patches and custom runtime settings)
 
 * `fontconfig-infinality-ultimate` (incl. custom `fontconfig` files as well as the
 entire generic `fontconfig` library). During installation of the package, the
-generic Arch Linux `fontconfig` package and `fontconfig-infinality-ultimate`
+generic Arch Linux `fontconfig` package and `fontconfig-infinality-ultimate-git`
 from the AUR (if installed in the system) should be automatically removed and
 replaced by the single `fontconfig-intinality-ultimate` from the `bundle`.
 +
-If for some reason the substitution cannot be performed automatically issue
+If for some reason the substitution cannot be performed automatically, issue
 (as root):
 +
     # pacman -Rdd fontconfig fontconfig-infinality-ultimate
@@ -119,16 +142,17 @@ provide all the necessary dependencies for use with applications that require it
 `cairo-1.12.8-expose_snapshot-1.patch`, as well as Ubuntu patches).
 
 The source code is always the same as used for the official Arch Linux packages.
-Always, _if_ possible... Arch is a bleeding edge distribution, so it may happen
-that the patches needed by `infinality-bundle` have not caught up with the
+Always, _if_ possible… Arch is a bleeding edge distribution, so it may happen
+that the patches needed by `infinality-bundle` have not caught up yet with the
 version of a library used there. In such cases, the priority is granted to
 compatibility, so that the officially available package can be used instead of
 its patched version. However, it has not happened yet that the `freetype2`
-libraries with updated patches were unavailable for a longer period of time.
+libraries with updated patches were unavailable for a significantly longer
+period of time.
 
 The libraries that come with `infinality-bundle` can be safely used as
-drop-in replacements for correspondng generic Arch Linux packages, providing 
-fully compatible dependencies for other applications.
+drop-in replacements for correspondng Arch Linux packages, providing fully
+compatible dependencies for other applications.
 
 [NOTE]
 The beta/development/git versions of the core libraries are not and
@@ -139,13 +163,12 @@ will not be supported by the `bundle`.
 offers exactly the same font configuration as `fontconfig-infinality-ultimate`
 from `infinality-bundle`. However, they are not mutually compatible on a
 package content level and therefore the AUR version _cannot_ be used as a part
-of `infinality-bundle`.   +
-It is planned either to rename the AUR version appropriately in the future, or
-deprecate it altogether and replace it with the new version from
-`infinality-bundle` (if this is the case, all the components of the bundle will
-be available in the AUR).
+of `infinality-bundle` in its present state.   +
+However, the git package will soon offer exactly the same functionality as
+the `ultimate` one.
 
-The following naming convention is used throughout the `bundle`:
+The following naming convention is used throughout the `bundle` (for the initial
+release of every new version of a package):
 
   ${pkgname}-infinality-ultimate-${pkgver}-${pkgrel+1}
 
@@ -154,29 +177,22 @@ The following naming convention is used throughout the `bundle`:
 Fonts: prerequisites
 --------------------
 
-You have a choice of either Windows, Apple, or free font families for your
-default sans, serif and monospace typefaces. The default--and
-recommended--configuration defaults to MS font families, including extended,
-non-latin language support. For best results, use fonts available in Windows 7
-or 8 Professional.
-
-In case you want to use either Apple or free fonts instead, you will have to
-manually remove currently active symlinks and create new ones in
-`/etc/fonts/conf.d`, e.g.:
+For the best experience, it is recommended to use Microsoft font families
+(most recent ones as far as possible). Free fonts should be always automatically
+used as fallback ones when none of the major sets is detected. If you want to
+alter the default priorities set in `60-latin.conf` and `65-non-latin.conf`, you
+can do so on a user basis in your local `fontconfig` configuration files in
+`$XDG_CONFIG_HOME/fontconfig` (see examples in
+`/usr/share/doc/fontconfig-infinality-ultimate/fontconfig`). If necessary, you
+can modify global configuration: to do so, duplicate `60-latin.conf` and
+`65-non-latin.conf` as `61-latin.conf` and `66-non-latin.conf` respectively and
+save your changes in them (this should prevent them from being overwritten
+during update or re-installation). In order to activate your custom
+configuration, edit symbolic links in `/etc/fonts/conf.d` (as root):
 
   # cd /etc/fonts/conf.d
-  # rm 20-aliases-default.conf
-  # ln -s ../conf.avail.infinality/20-aliases-default-free.conf
-
-The highly recommended free font family is available in the AUR as
-`ttf-chromeos-fonts` package.
-
-Free fonts should be always automatically used as fallback ones when none of
-the major sets is detected.
-
-The Infinality compatible settings are collected in
-`/etc/fonts/conf.avail.infinality` to separate them from generic `fontconfig`
-files present in `/etc/fonts/conf.avail`.
+  # ln -s -f ../conf.avail.infinality/61-latin.conf .
+  # ln -s -f ../conf.avail.infinality/66-non-latin.conf .
 
 If a font is available both in `TTF` and `OTF` format, the preferred one is
 usually `OTF`, as long as the `OTF` version is _not_ in early development or
@@ -214,9 +230,9 @@ further instructions.
 User specific customizations
 ----------------------------
 
-Users can alter the default `fontconfig` settings and introduce new ones on the 
-individual basis via `fontconfig` XDG directory structure, specifically in the 
-following locations:
+As already mentioned, users can alter the default `fontconfig` settings and
+introduce new ones on the individual basis via `fontconfig` XDG directory
+structure, specifically in the following locations:
 
   ${XDG_CONFIG_HOME}/fontconfig/conf.d
   ${XDG_CONFIG_HOME}/fontconfig/fonts.conf
@@ -228,10 +244,6 @@ It is still possible to use old locations,
 
 However, since they are planned to be dropped in new `fontconfig` releases, it is
 best to adjust custom configs to new standards.
-
-A few ready to use examples are available in `/usr/share/doc/fontconfig-ultimate`.
-For further assistance, refer to `fontconfig` documentation in
-`/usr/share/doc/fontconfig` as well as individual man pages.
 
 
 [[anchor-7]]
@@ -247,8 +259,14 @@ The following are considered features
 
 - *I don't like it!*
 +
-You should make friends with http://bohoomil.github.io/images/andy.jpg[Andy
-Pipkin]. I mean it.
+Don't use it.
+
+- *Fonts are too thin / too dark / not dark enough, etc.*
++
+`/etc/profile.d/infinality-settings.sh` offers three default brightness /
+darkness balance levels to choose from: it is enough to comment out the
+currently active set and uncomment a different one. If the presets are still not
+what you want, you can customize them to any extent you wish, on your own.
 
 - *The rendering is not the same as in Windows (any version), Apple (any
 version), Any-Other-Platform (any version). I don't like it!*
@@ -257,8 +275,6 @@ Let me repeat it: The intention behind the ultimate package is _not_ reproductio
 of existing solutions, but creating new, distinct ones that would offer high
 quality font rendering on the Linux platform, regardless of the native
 language. Period.
-+
-For further instructions, go to the previous point.
 
 - *`OTF` vs. `TTF` fonts*
 +
@@ -273,10 +289,14 @@ may be added if technically possible.
 - *A font is buggy / badly coded.*
 +
 While this is not really a ``feature'', there are several fonts that are known to
-behave badly under Linux, with or without Infinality patches. In certain cases,
+behave badly under Linux, with or without infinality patches. In certain cases,
 it is possible to introduce more or less successful workarounds (Helvetica,
 Luxi Mono), whilst sometimes a font will not render correctly regardless of
 tricks used (like FreeSans Regular 11px for instance).
++
+To avoid problems, the most problematic fonts were substituted with
+equivalent faces that should work correctly and provide almost identical
+experience.
 
 - *An updated version of a font is considered worse than its previous
 version(s).*
@@ -352,7 +372,7 @@ typography. Here is a short list of useful documents to start with:
 Software/fontconfig]
 ** http://www.freetype.org/freetype2/[FreeType Overview]
 
-* Infinality home & forums
+* infinality home & forums
 
 ** http://www.infinality.net[www.infinality.net]
 
@@ -368,8 +388,8 @@ Freetype subpixel font rendering - lcd monitors Pt 2]
 * popular fonts available in Arch Linux
 ** https://wiki.archlinux.org/index.php/Fonts[Fonts - ArchWiki]
 
-`infinality-bundle` sources are available at
-https://github.com/bohoomil/fontconf[GitHub] (branch `infinality-bundle`).
+`fontconfig-infinality-bundle` at GitHub is available 
+https://github.com/bohoomil/fontconfig-ultimate[here] (branch `infinality-bundle`).
 
 
 [[anchor-9]]

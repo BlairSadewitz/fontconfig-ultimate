@@ -11,12 +11,13 @@
 --------------------------------------------------------------------------- */
 
 body {
-	font-family:verdana,helvetica,arial,sans-serif;
-	font-size: 13px;     /*81.25%;*/   /* 13px */
+	font-family:'open sans', 'dejavu sans', sans-serif;
+	font-size: 14px;     /*81.25%;*/   /* 13px */
 	line-height:1.538;  /* 20px */
 	margin:40px auto 50px auto;
-	max-width:53.8461538462em; /* 790px */
-	color:#333;
+	/*max-width:53.8461538462em; */ /* 790px */
+	max-width: 46.8461538462em;
+	color:#1a1a1a;
 }
 
 em {
@@ -29,7 +30,7 @@ strong {
 }
 
 .monospaced, tt, div.listingblock > div.content {
-	font-family: 'Consolas', 'Andale Mono', monospace;
+	font-family: 'cousine', 'dejavu sans mono','droid sans mono', monospace;
 	color:#000;
   font-size: 13px;  /*81.25%;*/  /* 13px */
 }
@@ -48,19 +49,19 @@ dt {
 }
 
 h1, h2, h3, h4, h5 {
-	font-family:'lucida grande',georgia,verdana,helvetica,arial,sans-serif;
+	font-family:'dejavu sans' ,verdana, sans-serif;
 	font-weight:normal;
 	color:#000;
 }
 
 h1 {
-	font-size:35px;
+	font-size:30px;
 	line-height:1.428;
 	margin:20px 0;
 }
 
 h2 {
-	font-size:25px;
+	font-size:22px;
 	line-height:1.36363636; /* repeating, of course */
 	margin:60px 0 20px 0;
 }
@@ -68,13 +69,13 @@ h2 {
 h2 + .sectionbody {}
 
 h3 {
-	font-size:20px;
+	font-size:17px;
 	line-height:1.1;
 	margin:30px 0 10px 0;
 }
 
 h4 {
-	font-size:18px;
+	font-size:15px;
 	line-height:1.1;
 	margin:20px 0 5px 0;
 }
@@ -389,7 +390,7 @@ asciidoc.install();
 <h2 id="anchor-1">What is, what is not &amp; motivation</h2>
 <div class="sectionbody">
 <div class="paragraph"><p><span class="monospaced">infinality-bundle</span> is a collection of software utilizing the power of font
-rendering offered by Infinality patches and <span class="monospaced">fontconfig</span> rules known as
+rendering offered by infinality patches and <span class="monospaced">fontconfig</span> rules known as
 <span class="monospaced">fontconfig-infinality-ultimate</span>.</p></div>
 <div class="paragraph"><p>Even though the installation of separately distributed packages (i.e.
 <span class="monospaced">freetype2-infinality</span>, <span class="monospaced">fontconfig-infinality-ultimate</span> and
@@ -410,7 +411,7 @@ missing the feel of the original. Infinality patches offer something different
 and more than any of the available rendering solutions&#8201;&#8212;&#8201;even more than they do
 themselves out of the box. That is why the aim of <span class="monospaced">infinality-bundle</span> is to
 make use of the vast potential hidden in native Linux font rendering back-end
-that was brought to the entirely new level by the author of Infinality patches.</p></div>
+that was brought to the entirely new level by the author of infinality patches.</p></div>
 <div class="paragraph"><p><strong>Linux no more needs to reproduce well known solutions as it is capable of
 proposing new ones on its own, and creating new standards just like it has been
 successfully doing in other areas.</strong> Thus, the model to follow is <em>not</em> owned by any
@@ -426,9 +427,42 @@ discovered.</p></div>
 <div class="sect1">
 <h2 id="anchor-2">fontconfig-infinality-ultimate vs. fontconfig-infinality</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Although <span class="monospaced">infinality-bundle</span> was entirely made possible by excellent
-Infinality patches, it is not compatible with generic Infinality settings in
-every respect. Here is a short list of most significant differences:</p></div>
+<div class="paragraph"><p>Although <span class="monospaced">infinality-bundle</span> was entirely made possible by excellent infinality
+patches, it is not compatible with generic infinality settings in every respect.</p></div>
+<div class="paragraph"><p>As of version <span class="monospaced">2.10.92-10</span>, <span class="monospaced">fontconfig-infinality-ultimate</span> entirely abandons
+the &#8220;nesting&#8221; configuration model known from <span class="monospaced">fontconfig-infinality</span>, and
+configuration templates found in <span class="monospaced">/etc/fonts/conf.avail.infinality</span> from now on
+mimic the layout of the generic <span class="monospaced">/etc/fonts/conf.avail</span> as close as possible.</p></div>
+<div class="paragraph"><p>There are quite a few benefits of reverting to a typical <span class="monospaced">fontconfig</span> style
+configuration:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+The infinality configuration files are hardcoded into <span class="monospaced">fontconfig</span> source
+code, allowing for easier maintenance, building, rebuilding and porting
+<span class="monospaced">fontconfig-infinality-ultimate</span> to other compatible operating systems. A
+complete set of patches was made available, alongside modified PKGBUILD,
+making the process dramatically more straightforward.
+</p>
+</li>
+<li>
+<p>
+Deploying <span class="monospaced">fontconfig-infinality-ultimate</span> in other Linux distributions should
+require as little as applying the patches and substituting the generic
+<span class="monospaced">infinality-settings.sh</span> with a custom one from the <span class="monospaced">bundle</span>.
+</p>
+</li>
+<li>
+<p>
+Using a single <span class="monospaced">fontconfig</span> configuration tree should help avoid potential
+issues caused by injecting a complex set of additional config files into the
+primary structure. The latter approach has proved to be less reliable and more
+prone to problems, for instance due to accidental mutual overriding of settings
+by stock <span class="monospaced">fontconfig</span> and the <span class="monospaced">ultimate</span> plugin.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Here is a short list of further most substantial differences:</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
@@ -436,37 +470,37 @@ Multiple runtime settings that come with <span class="monospaced">freetype2-infi
 among other things, a selection of Windows, Apple and Ubuntu schemes were
 replaced by a single new one, as needed by <span class="monospaced">fontconfig-infinality-ultimate</span>.
 <span class="monospaced">/etc/profile.d/infinality-settings.sh</span> should <em>not</em> be used in conjunction
-with any other similar file either supplied with Infinality sources, or with
+with any other similar file either supplied with infinality sources, or with
 other custom packages. Any previously installed runtime file can be safely
 removed once <span class="monospaced">freetype2-infinality-ultimate</span> has been installed.
 </p>
 </li>
 <li>
 <p>
-<span class="monospaced">/etc/fonts/infinality/infinality.conf</span> was merged with
-<span class="monospaced">/etc/fonts/fonts.conf</span> and <span class="monospaced">/etc/fonts/conf.d/52-infinality.conf</span> was removed
-as not needed anymore. Since the purpose of the
-<span class="monospaced">fontconfig-infinality-ultimate</span> package was to create a separately maintained
-<span class="monospaced">fontconfig</span> library that would integrate both generic and Infinality features,
-it seemed unnecessary to keep multiple files serving the same purpose.
-<span class="monospaced">fontconfig-infinality-ultimate</span> was tailored for use with
-<span class="monospaced">freetype2-infinality-ultimate</span> in the first place, and although it can be
-switched to act as a generic Arch <span class="monospaced">fontconfig</span> library (which requires
-manual user intervention), it is recommended to use it <em>only</em> with
-<span class="monospaced">infinality-bundle</span> for more straightforward maintenance. In majority of
-cases, using the pre-compiled packages, or building the <span class="monospaced">bundle</span> from provided
-scripts on one&#8217;s own, is a recommended solution that should <em>just work</em> (and I
-hope it will).
+<span class="monospaced">/etc/fonts/infinality/infinality.conf</span> was reverted to its original form. All
+the settings formerly found in <span class="monospaced">infinality.conf</span> are now located in separate
+config files available in <span class="monospaced">/etc/fonts/conf.avail.infinality</span>. They can be
+activated as needed via symbolic links in <span class="monospaced">/etc/fonts/conf.d</span>.
 </p>
-<div class="paragraph"><p>The generic <span class="monospaced">fontconfig</span> files are still available for reference in
-<span class="monospaced">/etc/fonts/conf.avail</span> and <span class="monospaced">/etc/fonts/fonts.conf.pacsave</span>.</p></div>
 </li>
 <li>
 <p>
-Type1 fonts are enabled by default. In certain cases it is recommended to use
-<span class="monospaced">T1</span> fonts instead of <span class="monospaced">TTF</span> (e.g. Lexi Mono). All Postscript fonts used for
-testing, available in Arch Linux official repositories, have proved to render
-correctly.
+Per-user customizations should be located in
+</p>
+<div class="literalblock">
+<div class="content monospaced">
+<pre>$XDG_CONFIG_HOME/fontconfig/conf.d
+$XDG_CONFIG_HOME/fontconfig/fonts.conf</pre>
+</div></div>
+<div class="paragraph"><p>A few examples can be found in <span class="monospaced">/usr/share/doc/fontconfig-infinality-ultimate/</span>.
+Once activated, custom settings should be honored by applications.</p></div>
+</li>
+<li>
+<p>
+Type1 fonts are enabled by default. In certain cases the use of <span class="monospaced">T1</span>
+fonts instead of <span class="monospaced">TTF</span> is recommended (e.g. Lexi Mono). All Postscript fonts
+used for testing, available in Arch Linux official repositories, have proved
+to render correctly.
 </p>
 </li>
 <li>
@@ -476,6 +510,8 @@ default <span class="monospaced">fontconfig-infinality</span> settings have been
 </p>
 </li>
 </ul></div>
+<div class="paragraph"><p>All in all, you may think of <span class="monospaced">fontconfig-infinality-ultimate</span> as a stock
+<span class="monospaced">fontconfig</span> package with a hard coded infinality functionality.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -486,18 +522,18 @@ default <span class="monospaced">fontconfig-infinality</span> settings have been
 <li>
 <p>
 <span class="monospaced">freetype2-infinality-ultimate</span> (incl. most recent, officially released
-Infinality patches and custom runtime settings)
+infinality patches and custom runtime settings)
 </p>
 </li>
 <li>
 <p>
 <span class="monospaced">fontconfig-infinality-ultimate</span> (incl. custom <span class="monospaced">fontconfig</span> files as well as the
 entire generic <span class="monospaced">fontconfig</span> library). During installation of the package, the
-generic Arch Linux <span class="monospaced">fontconfig</span> package and <span class="monospaced">fontconfig-infinality-ultimate</span>
+generic Arch Linux <span class="monospaced">fontconfig</span> package and <span class="monospaced">fontconfig-infinality-ultimate-git</span>
 from the AUR (if installed in the system) should be automatically removed and
 replaced by the single <span class="monospaced">fontconfig-intinality-ultimate</span> from the <span class="monospaced">bundle</span>.
 </p>
-<div class="paragraph"><p>If for some reason the substitution cannot be performed automatically issue
+<div class="paragraph"><p>If for some reason the substitution cannot be performed automatically, issue
 (as root):</p></div>
 <div class="literalblock">
 <div class="content monospaced">
@@ -515,15 +551,16 @@ provide all the necessary dependencies for use with applications that require it
 </li>
 </ul></div>
 <div class="paragraph"><p>The source code is always the same as used for the official Arch Linux packages.
-Always, <em>if</em> possible&#8230; Arch is a bleeding edge distribution, so it may happen
-that the patches needed by <span class="monospaced">infinality-bundle</span> have not caught up with the
+Always, <em>if</em> possible… Arch is a bleeding edge distribution, so it may happen
+that the patches needed by <span class="monospaced">infinality-bundle</span> have not caught up yet with the
 version of a library used there. In such cases, the priority is granted to
 compatibility, so that the officially available package can be used instead of
 its patched version. However, it has not happened yet that the <span class="monospaced">freetype2</span>
-libraries with updated patches were unavailable for a longer period of time.</p></div>
+libraries with updated patches were unavailable for a significantly longer
+period of time.</p></div>
 <div class="paragraph"><p>The libraries that come with <span class="monospaced">infinality-bundle</span> can be safely used as
-drop-in replacements for correspondng generic Arch Linux packages, providing
-fully compatible dependencies for other applications.</p></div>
+drop-in replacements for correspondng Arch Linux packages, providing fully
+compatible dependencies for other applications.</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -542,14 +579,13 @@ will not be supported by the <span class="monospaced">bundle</span>.</td>
 offers exactly the same font configuration as <span class="monospaced">fontconfig-infinality-ultimate</span>
 from <span class="monospaced">infinality-bundle</span>. However, they are not mutually compatible on a
 package content level and therefore the AUR version <em>cannot</em> be used as a part
-of <span class="monospaced">infinality-bundle</span>.  <br>
-It is planned either to rename the AUR version appropriately in the future, or
-deprecate it altogether and replace it with the new version from
-<span class="monospaced">infinality-bundle</span> (if this is the case, all the components of the bundle will
-be available in the AUR).</td>
+of <span class="monospaced">infinality-bundle</span> in its present state.  <br>
+However, the git package will soon offer exactly the same functionality as
+the <span class="monospaced">ultimate</span> one.</td>
 </tr></table>
 </div>
-<div class="paragraph"><p>The following naming convention is used throughout the <span class="monospaced">bundle</span>:</p></div>
+<div class="paragraph"><p>The following naming convention is used throughout the <span class="monospaced">bundle</span> (for the initial
+release of every new version of a package):</p></div>
 <div class="literalblock">
 <div class="content monospaced">
 <pre>${pkgname}-infinality-ultimate-${pkgver}-${pkgrel+1}</pre>
@@ -559,27 +595,24 @@ be available in the AUR).</td>
 <div class="sect1">
 <h2 id="anchor-4">Fonts: prerequisites</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>You have a choice of either Windows, Apple, or free font families for your
-default sans, serif and monospace typefaces. The default&#8212;and
-recommended&#8212;configuration defaults to MS font families, including extended,
-non-latin language support. For best results, use fonts available in Windows 7
-or 8 Professional.</p></div>
-<div class="paragraph"><p>In case you want to use either Apple or free fonts instead, you will have to
-manually remove currently active symlinks and create new ones in
-<span class="monospaced">/etc/fonts/conf.d</span>, e.g.:</p></div>
+<div class="paragraph"><p>For the best experience, it is recommended to use Microsoft font families
+(most recent ones as far as possible). Free fonts should be always automatically
+used as fallback ones when none of the major sets is detected. If you want to
+alter the default priorities set in <span class="monospaced">60-latin.conf</span> and <span class="monospaced">65-non-latin.conf</span>, you
+can do so on a user basis in your local <span class="monospaced">fontconfig</span> configuration files in
+<span class="monospaced">$XDG_CONFIG_HOME/fontconfig</span> (see examples in
+<span class="monospaced">/usr/share/doc/fontconfig-infinality-ultimate/fontconfig</span>). If necessary, you
+can modify global configuration: to do so, duplicate <span class="monospaced">60-latin.conf</span> and
+<span class="monospaced">65-non-latin.conf</span> as <span class="monospaced">61-latin.conf</span> and <span class="monospaced">66-non-latin.conf</span> respectively and
+save your changes in them (this should prevent them from being overwritten
+during update or re-installation). In order to activate your custom
+configuration, edit symbolic links in <span class="monospaced">/etc/fonts/conf.d</span> (as root):</p></div>
 <div class="literalblock">
 <div class="content monospaced">
 <pre># cd /etc/fonts/conf.d
-# rm 20-aliases-default.conf
-# ln -s ../conf.avail.infinality/20-aliases-default-free.conf</pre>
+# ln -s -f ../conf.avail.infinality/61-latin.conf .
+# ln -s -f ../conf.avail.infinality/66-non-latin.conf .</pre>
 </div></div>
-<div class="paragraph"><p>The highly recommended free font family is available in the AUR as
-<span class="monospaced">ttf-chromeos-fonts</span> package.</p></div>
-<div class="paragraph"><p>Free fonts should be always automatically used as fallback ones when none of
-the major sets is detected.</p></div>
-<div class="paragraph"><p>The Infinality compatible settings are collected in
-<span class="monospaced">/etc/fonts/conf.avail.infinality</span> to separate them from generic <span class="monospaced">fontconfig</span>
-files present in <span class="monospaced">/etc/fonts/conf.avail</span>.</p></div>
 <div class="paragraph"><p>If a font is available both in <span class="monospaced">TTF</span> and <span class="monospaced">OTF</span> format, the preferred one is
 usually <span class="monospaced">OTF</span>, as long as the <span class="monospaced">OTF</span> version is <em>not</em> in early development or
 experimental stage. <span class="monospaced">OTF</span> is a newer and easier to handle standard, and as a
@@ -613,9 +646,9 @@ further instructions.</p></div>
 <div class="sect1">
 <h2 id="anchor-6">User specific customizations</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Users can alter the default <span class="monospaced">fontconfig</span> settings and introduce new ones on the
-individual basis via <span class="monospaced">fontconfig</span> XDG directory structure, specifically in the
-following locations:</p></div>
+<div class="paragraph"><p>As already mentioned, users can alter the default <span class="monospaced">fontconfig</span> settings and
+introduce new ones on the individual basis via <span class="monospaced">fontconfig</span> XDG directory
+structure, specifically in the following locations:</p></div>
 <div class="literalblock">
 <div class="content monospaced">
 <pre>${XDG_CONFIG_HOME}/fontconfig/conf.d
@@ -629,9 +662,6 @@ ${XDG_CONFIG_HOME}/fontconfig/fonts.conf</pre>
 </div></div>
 <div class="paragraph"><p>However, since they are planned to be dropped in new <span class="monospaced">fontconfig</span> releases, it is
 best to adjust custom configs to new standards.</p></div>
-<div class="paragraph"><p>A few ready to use examples are available in <span class="monospaced">/usr/share/doc/fontconfig-ultimate</span>.
-For further assistance, refer to <span class="monospaced">fontconfig</span> documentation in
-<span class="monospaced">/usr/share/doc/fontconfig</span> as well as individual man pages.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -647,8 +677,16 @@ system. If both answers are positive, read on.</p></div>
 <p>
 <strong>I don&#8217;t like it!</strong>
 </p>
-<div class="paragraph"><p>You should make friends with <a href="http://bohoomil.github.io/images/andy.jpg">Andy
-Pipkin</a>. I mean it.</p></div>
+<div class="paragraph"><p>Don&#8217;t use it.</p></div>
+</li>
+<li>
+<p>
+<strong>Fonts are too thin / too dark / not dark enough, etc.</strong>
+</p>
+<div class="paragraph"><p><span class="monospaced">/etc/profile.d/infinality-settings.sh</span> offers three default brightness /
+darkness balance levels to choose from: it is enough to comment out the
+currently active set and uncomment a different one. If the presets are still not
+what you want, you can customize them to any extent you wish, on your own.</p></div>
 </li>
 <li>
 <p>
@@ -659,7 +697,6 @@ version), Any-Other-Platform (any version). I don&#8217;t like it!</strong>
 of existing solutions, but creating new, distinct ones that would offer high
 quality font rendering on the Linux platform, regardless of the native
 language. Period.</p></div>
-<div class="paragraph"><p>For further instructions, go to the previous point.</p></div>
 </li>
 <li>
 <p>
@@ -677,10 +714,13 @@ may be added if technically possible.</p></div>
 <strong>A font is buggy / badly coded.</strong>
 </p>
 <div class="paragraph"><p>While this is not really a &#8220;feature&#8221;, there are several fonts that are known to
-behave badly under Linux, with or without Infinality patches. In certain cases,
+behave badly under Linux, with or without infinality patches. In certain cases,
 it is possible to introduce more or less successful workarounds (Helvetica,
 Luxi Mono), whilst sometimes a font will not render correctly regardless of
 tricks used (like FreeSans Regular 11px for instance).</p></div>
+<div class="paragraph"><p>To avoid problems, the most problematic fonts were substituted with
+equivalent faces that should work correctly and provide almost identical
+experience.</p></div>
 </li>
 <li>
 <p>
@@ -814,7 +854,7 @@ Software/fontconfig</a>
 </li>
 <li>
 <p>
-Infinality home &amp; forums
+infinality home &amp; forums
 </p>
 <div class="ulist"><ul>
 <li>
@@ -857,8 +897,8 @@ popular fonts available in Arch Linux
 </ul></div>
 </li>
 </ul></div>
-<div class="paragraph"><p><span class="monospaced">infinality-bundle</span> sources are available at
-<a href="https://github.com/bohoomil/fontconf">GitHub</a> (branch <span class="monospaced">infinality-bundle</span>).</p></div>
+<div class="paragraph"><p><span class="monospaced">fontconfig-infinality-bundle</span> at GitHub is available
+<a href="https://github.com/bohoomil/fontconfig-ultimate">here</a> (branch <span class="monospaced">infinality-bundle</span>).</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -873,9 +913,9 @@ popular fonts available in Arch Linux
 <div id="footer">
 <div id="footer-text">
 © bohoomil, some rights reserved ::
-v0.1 ::
-last updated 2013-04-24 ::
-asciidoc theme: 'scribe' by R. Tomayko
+v0.2 ::
+last updated 2013-05-15 ::
+asciidoc theme: 'scribe' by R. Tomayko (modified)
 <br>
 </div>
 </div>
