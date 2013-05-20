@@ -1,6 +1,6 @@
 ### infinality environment variables for extra run-time options ###
 ### custom settings by bohoomil ###
-### http://bohoomil.github.io/ib.html ###
+### http://bohoomil.cu.cc ###
 
 SET_XFT_SETTINGS=true
 
@@ -37,6 +37,7 @@ export INFINALITY_FT_AUTOHINT_INCREASE_GLYPH_HEIGHTS="true"
 export INFINALITY_FT_AUTOHINT_SNAP_STEM_HEIGHT="50"
 export INFINALITY_FT_STEM_SNAPPING_SLIDING_SCALE="30"
 export INFINALITY_FT_USE_KNOWN_SETTINGS_ON_SELECTED_FONTS="true"
+### freetype2 2.4.12 ###
 #export INFINALITY_FT_GLOBAL_EMBOLDEN_X_VALUE=0
 #export INFINALITY_FT_GLOBAL_EMBOLDEN_Y_VALUE=0
 #export INFINALITY_FT_BOLD_EMBOLDEN_X_VALUE=0
