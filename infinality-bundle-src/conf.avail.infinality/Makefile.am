@@ -94,6 +94,7 @@ templateinf_DATA =				\
 	90-non-tt-fonts-qt.conf   \
 	90-tt-fonts.conf    \
 	91-no-qt-subpixel-positioning.conf    \
+	91-tt-monospace-fonts.conf		\
 	92-selective-rendering.conf   \
 	93-final-lang-spec.conf   \
 	93-final-rendering.conf   \
