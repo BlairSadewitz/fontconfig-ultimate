@@ -30,7 +30,7 @@ CONF_LINKS = \
 	37-repl-global.conf   \
 	38-repl-tt-traced-bitmap.conf   \
 	39-repl-corrective.conf   \
-	40-nonlatin.conf    \
+	40-non-latin.conf    \
 	45-latin.conf   \
 	49-sansserif.conf   \
 	50-user.conf    \
@@ -65,7 +65,7 @@ templateinf_DATA =				\
 	37-repl-global.conf   \
 	38-repl-tt-traced-bitmap.conf   \
 	39-repl-corrective.conf   \
-	40-nonlatin.conf    \
+	40-non-latin.conf    \
 	45-latin.conf   \
 	49-sansserif.conf   \
 	50-user.conf    \
