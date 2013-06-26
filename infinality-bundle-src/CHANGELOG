@@ -21,7 +21,7 @@ CHANGELOG
 ** Code cleanup and revision results in more consistent rules.
 
 ** Simpler yes (83-yes-foo.conf) / no (82-no-foo.conf) switches for more
-   obvious access to global features.
+   intuitive access to global features.
 
 ** Added support for several new font families.
 
