@@ -2,41 +2,49 @@
 CHANGELOG
 ---------
 
+
+2013-08-31 by bohoomil
+~~~~~~~~~~~~~~~~~~~~~~
+
+* Upstream version upgrade: fontconfig 2.10.95.
+
+* Minor fixes & tweaks, a few font families added.
+
 2013-07-24 by bohoomil
 ~~~~~~~~~~~~~~~~~~~~~~
 
-* changes in infinality-settings.sh:
+* Changes to infinality-settings.sh:
 ** Xft hintstyle    => hintslight (this should fix
    kerning issues in a few cases)
 ** fringe filter    => 50
 
-* changes to 37-repl-global.conf
+* Changes to 37-repl-global.conf
 ** Courier rule can be commented out if using Adobe Courier T1
 ** Geneva TTF       => Noto Sans TTF
 ** Inconsolata TTF  => Inconsolata-zi4 T1 (TeXLive)
 ** proxima-nova TTF => Open Sans T1
 
-* changes to 66-wine-aliases.conf
+* Changes to 66-wine-aliases.conf
 ** SegoeUI          => Microsoft Sans Serif
    (due to recent issues with SegoeUI)
 
-* minor changes to 90-non-tt-fonts.conf, 90-tt-fonts.conf,
+* Minor changes to 90-non-tt-fonts.conf, 90-tt-fonts.conf,
   92-selective-rendering.conf
 
 2013-07-11 by bohoomil
 ~~~~~~~~~~~~~~~~~~~~~~
 
-* changes in infinality-settings.sh:
+* Changes to infinality-settings.sh:
 ** increased fringe filter 30 => 40
 
-* changes in 37-repl-global.conf:
+* Changes to 37-repl-global.conf:
 ** Courier TTF      => Courier T1 (TeXLive)
 ** Helvetica        => Liberastika
 ** Inconsolata TTF  => Inconsolata-zi4 T1 (TeXLive)
 ** Open Sans TTF    => Open Sans T1 (TexLive)
 ** proxima-nova TTF => Open Sans T1 (TeXLive)
 
-* changes and fixes in 90-{non)-tt-fonts.conf:
+* Changes and fixes in 90-{non)-tt-fonts.conf:
 ** Cantarell OTF    => Cantarell T1 (TeXLive)
 ** Inconsolata TTF  => Inconsolata-zi4 T1 (TeXLive)
 ** Courier TTF      => Courier T1 (TeXLive)
@@ -45,7 +53,7 @@ CHANGELOG
 ** Liberastika      => 90-tt-fonts.conf
 ** Lekton           => 90-tt-fonts.conf
 
-* changes in 92-selective-rendering.conf:
+* Changes to 92-selective-rendering.conf:
 ** Arial Regular > 28px < 33px, hintslight
 ** Arial Bold > 14px, hintslight
 ** TeX Gyre Heros (OTF) > 17.5px < 19.5px, autohint, hintfull
@@ -56,7 +64,7 @@ CHANGELOG
 2013-06-21 by bohoomil
 ~~~~~~~~~~~~~~~~~~~~~~
 
-* Mainstream upgrade: fontconfig -> 2.10.93, freetype2 2.5.0.1.
+* Upstream version upgrade: fontconfig 2.10.93, freetype2 2.5.0.1.
 
 * freetype2-infinality-ultimate 2.5.0.1-2:
 ** Moving to Adobe CFF as the default renderer.
