@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# fc-presets v.0.2 | by bohoomil, 2013, GPL
 # Set default fontconfig presets for your font collection.
 # Part of fontconfig-infinality-ultimate.
 
@@ -40,7 +41,6 @@ check_current(){
     count_all=$(echo $check_preset | wc -w)
     if [[ $? -eq 0 ]] && [[ $count_all -eq 5 ]]; then
       echo -e "You are currently using [ ${preset} ] presets."
-      current=$(echo $preset) >/dev/null
     fi
     popd >/dev/null
   done
@@ -61,6 +61,7 @@ set_preset(){
       for target in ${targets_rm[@]}; do
         rm $target
       done
+      # Do the job now...
       targets_list=$(ls $presets_dir/$preset/*.conf)
       for target in ${targets_list[@]}; do
         echo -e $target
