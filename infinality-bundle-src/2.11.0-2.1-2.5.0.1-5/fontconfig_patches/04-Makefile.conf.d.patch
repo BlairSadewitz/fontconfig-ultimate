@@ -1,5 +1,5 @@
---- Makefile.am.orig	2013-10-11 05:10:17.000000000 +0200
-+++ Makefile.am	2013-10-11 19:28:20.906699608 +0200
+--- a/conf.d/Makefile.am	2013-10-11 05:10:17.000000000 +0200
++++ b/conf.d/Makefile.am	2013-10-11 19:28:20.906699608 +0200
 @@ -25,22 +25,7 @@ BUILT_SOURCES = README
  DOC_SOURCES = README.in
  DOC_FILES = $(DOC_SOURCES:.in=)
@@ -46,8 +46,8 @@
 -	  done)
 -
  -include $(top_srcdir)/git.mk
---- Makefile.in.orig	2013-10-11 06:28:47.000000000 +0200
-+++ Makefile.in	2013-10-11 19:25:38.316697839 +0200
+--- a/conf.d/Makefile.in	2013-10-11 06:28:47.000000000 +0200
++++ b/conf.d/Makefile.in	2013-10-11 19:25:38.316697839 +0200
 @@ -162,7 +162,7 @@ am__uninstall_files_from_dir = { \
      || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
           $(am__cd) "$$dir" && rm -f $$files; }; \
