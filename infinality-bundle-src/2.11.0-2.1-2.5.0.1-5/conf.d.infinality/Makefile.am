@@ -21,8 +21,9 @@
 #  TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 #  PERFORMANCE OF THIS SOFTWARE.
 
-DOC_FILES= \
-	README
+BUILT_SOURCES = README
+DOC_SOURCES = README.in
+DOC_FILES = $(DOC_SOURCES:.in=)
 
 CONF_LINKS = \
 	10-base-rendering.conf    \
@@ -47,7 +48,8 @@ CONF_LINKS = \
 	94-no-synthetic.conf    \
 	95-reject.conf
 
-EXTRA_DIST = $(templateinf_DATA) $(DOC_FILES)
+EXTRA_DIST = $(templateinf_DATA) $(DOC_SOURCES)
+CLEANFILES = $(DOC_FILES)
 
 configdir=$(CONFIGDIR)
 config_DATA = $(DOC_FILES)
@@ -81,21 +83,7 @@ templateinf_DATA =				\
 	94-no-synthetic.conf    \
 	95-reject.conf
 
-install-data-hook:
-	mkdir -p $(DESTDIR)$(configdir)
-	@(echo cd $(DESTDIR)$(configdir);			\
-	  cd $(DESTDIR)$(configdir);				\
-	  for i in $(CONF_LINKS); do				\
-	    echo $(RM) $$i";" ln -s $(templateinfdir)/$$i .;	\
-	    $(RM) $$i;						\
-	    ln -s $(templateinfdir)/$$i .;				\
-	  done)
-uninstall-local:
-	@(echo cd $(DESTDIR)$(configdir);			\
-	  cd $(DESTDIR)$(configdir);				\
-	  for i in $(CONF_LINKS); do				\
-	    echo $(RM) $$i;					\
-	    $(RM) $$i;						\
-	  done)
+README: $(srcdir)/README.in
+	sed "s|\@TEMPLATEINFDIR\@|$(templateinfdir)|" $< > $@
 
 -include $(top_srcdir)/git.mk
