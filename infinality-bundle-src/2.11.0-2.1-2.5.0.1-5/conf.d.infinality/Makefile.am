@@ -51,7 +51,7 @@ CONF_LINKS = \
 EXTRA_DIST = $(templateinf_DATA) $(DOC_SOURCES)
 CLEANFILES = $(DOC_FILES)
 
-configdir=$(CONFIGDIR)
+configdir = $(CONFIGDIR)
 config_DATA = $(DOC_FILES)
 
 templateinfdir = $(TEMPLATEINFDIR)
@@ -85,5 +85,22 @@ templateinf_DATA =				\
 
 README: $(srcdir)/README.in
 	sed "s|\@TEMPLATEINFDIR\@|$(templateinfdir)|" $< > $@
+
+install-data-hook:
+	mkdir -p $(DESTDIR)$(configdir)
+	@(echo cd $(DESTDIR)$(configdir);			\
+	  cd $(DESTDIR)$(configdir);				\
+	  for i in $(CONF_LINKS); do				\
+	    echo $(RM) $$i";" ln -s $(templateinfdir)/$$i .;	\
+	    $(RM) $$i;						\
+	    ln -s $(templateinfdir)/$$i .;				\
+	  done)
+uninstall-local:
+	@(echo cd $(DESTDIR)$(configdir);			\
+	  cd $(DESTDIR)$(configdir);				\
+	  for i in $(CONF_LINKS); do				\
+	    echo $(RM) $$i;					\
+	    $(RM) $$i;						\
+	  done)
 
 -include $(top_srcdir)/git.mk
