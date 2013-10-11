@@ -1,6 +1,6 @@
---- a/conf.d/Makefile.am	2013-05-13 05:10:36.000000000 +0200
-+++ b/conf.d/Makefile.am	2013-05-25 23:19:21.949016131 +0200
-@@ -25,27 +25,11 @@ BUILT_SOURCES = README
+--- Makefile.am.orig	2013-10-11 05:10:17.000000000 +0200
++++ Makefile.am	2013-10-11 19:28:20.906699608 +0200
+@@ -25,22 +25,7 @@ BUILT_SOURCES = README
  DOC_SOURCES = README.in
  DOC_FILES = $(DOC_SOURCES:.in=)
  
@@ -24,12 +24,7 @@
  
  EXTRA_DIST = $(template_DATA) $(DOC_SOURCES)
  CLEANFILES = $(DOC_FILES)
- 
--configdir=$(CONFIGDIR)
- config_DATA = $(DOC_FILES)
- 
- templatedir = $(TEMPLATEDIR)
-@@ -83,21 +67,4 @@ template_DATA =				\
+@@ -83,21 +68,4 @@ template_DATA =				\
  README: $(srcdir)/README.in
  	sed "s|\@TEMPLATEDIR\@|$(templatedir)|" $< > $@
  
@@ -51,18 +46,18 @@
 -	  done)
 -
  -include $(top_srcdir)/git.mk
---- a/conf.d/Makefile.in	2013-05-20 10:44:34.000000000 +0200
-+++ b/conf.d/Makefile.in	2013-05-25 23:21:45.680016564 +0200
-@@ -134,7 +134,7 @@ am__uninstall_files_from_dir = { \
+--- Makefile.in.orig	2013-10-11 06:28:47.000000000 +0200
++++ Makefile.in	2013-10-11 19:25:38.316697839 +0200
+@@ -162,7 +162,7 @@ am__uninstall_files_from_dir = { \
      || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
           $(am__cd) "$$dir" && rm -f $$files; }; \
    }
 -am__installdirs = "$(DESTDIR)$(configdir)" "$(DESTDIR)$(templatedir)"
 +am__installdirs = "$(DESTDIR)$(templatedir)"
  DATA = $(config_DATA) $(template_DATA)
+ am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
  DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
- ACLOCAL = @ACLOCAL@
-@@ -299,22 +299,7 @@ xmldir = @xmldir@
+@@ -326,22 +326,7 @@ top_srcdir = @top_srcdir@
  BUILT_SOURCES = README
  DOC_SOURCES = README.in
  DOC_FILES = $(DOC_SOURCES:.in=)
@@ -86,7 +81,7 @@
  
  EXTRA_DIST = $(template_DATA) $(DOC_SOURCES)
  CLEANFILES = $(DOC_FILES)
-@@ -476,7 +461,7 @@ check: $(BUILT_SOURCES)
+@@ -503,7 +488,7 @@ check: $(BUILT_SOURCES)
  	$(MAKE) $(AM_MAKEFLAGS) check-am
  all-am: Makefile $(DATA)
  installdirs:
