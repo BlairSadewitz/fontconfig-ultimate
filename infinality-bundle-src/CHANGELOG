@@ -2,6 +2,12 @@
 CHANGELOG
 ---------
 
+2013-10-17 by bohoomil
+----------------------
+
+* fontconfig-infinality-ultimate
+** Swapping DejaVu TrueType for Type 1 (new default).
+
 2013-10-11 by bohoomil
 ----------------------
 
