@@ -23,6 +23,9 @@ CHANGELOG
 ** switching to per-typeface install locations
    instead of global TTF/OTF/Type1
 ** adding new typefaces:
+   Alegreya (OTF: extra)
+   Andada (OTF: extra)
+   Scada (OTF: extra)
    EB Garamond (T1, OTF: extra)
    Libre Baskerville (T1, OTF: extra, base)
    Libre Caslon Text (T1, OTF: extra)
