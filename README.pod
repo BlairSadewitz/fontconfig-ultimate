@@ -1,0 +1,6 @@
+=pod
+
+=head3 infinality-bundle archive
+
+The collection of patches and settings for various freetype2 and fontconfig releases.
+
