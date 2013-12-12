@@ -27,8 +27,10 @@ DOC_FILES = $(DOC_SOURCES:.in=)
 
 CONF_LINKS = \
 	10-base-rendering.conf    \
+	10-scale-bitmap-fonts.conf		\
+	30-metric-aliases.conf		\
 	31-fix-cantarell.conf   \
-	38-repl-tt-traced-bitmap.conf   \
+	36-repl-custom.conf		\
 	40-non-latin.conf    \
 	45-latin.conf   \
 	49-sansserif.conf   \
@@ -57,8 +59,12 @@ config_DATA = $(DOC_FILES)
 templateinfdir = $(TEMPLATEINFDIR)
 templateinf_DATA =				\
 	10-base-rendering.conf    \
+	10-scale-bitmap-fonts.conf	\
 	31-fix-cantarell.conf   \
-	38-repl-tt-traced-bitmap.conf   \
+	30-metric-aliases.conf		\
+	36-repl-custom.conf		\
+	38-repl-proggy-bitmap.conf   \
+	38-repl-terminus-bitmap.conf   \
 	40-non-latin.conf    \
 	45-latin.conf   \
 	49-sansserif.conf   \
